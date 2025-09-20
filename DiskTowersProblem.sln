@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiskTowersProblem", "DiskTowersProblem\DiskTowersProblem.csproj", "{B6173B33-22CA-47EB-A942-7CDF6309B7E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsikTowerProblemTest", "DsikTowerProblemTest\DsikTowerProblemTest.csproj", "{A5CD2057-5DA7-4143-84BB-8C062D961CCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiskTowerProblemTest", "DsikTowerProblemTest\DiskTowerProblemTest.csproj", "{A5CD2057-5DA7-4143-84BB-8C062D961CCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
