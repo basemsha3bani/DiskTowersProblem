@@ -28,7 +28,7 @@ namespace DsikTowerProblemTest
 
         }
         [TestMethod]
-        //[ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(Exception))]
         public void Build_Test_Tower_Sequence_Contains_0()
         {
             //Arranage

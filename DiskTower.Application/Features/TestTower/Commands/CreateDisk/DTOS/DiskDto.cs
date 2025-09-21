@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace DiskTowersProblem
+namespace DiskTower.Application.Features.TestTower.Commands.CreateDisk.DTOS
 {
-    internal class Disk
+    internal class DiskDto
     {
         public int size { get; set; }
         public bool printed { get; set; }
