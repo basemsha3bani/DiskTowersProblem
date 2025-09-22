@@ -1,4 +1,5 @@
 ﻿using DiskTower.Application.Contracts;
+using DiskTower.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,11 +8,13 @@ using System.Xml;
 
 namespace InfraStructure.Persistence.Repository
 {
-    internal class GenericRepository<T> : IRepository<T> where T : class
+    internal class GenericRepository<T> : IRepository<T> where T : GnericEntity
     {
-        public async Task<T> CreateAsync(T entity)
+        public async Task<string> CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await Task.Delay(1000);
+            entity.key = Guid.NewGuid();
+            return entity.key.ToString();
         }
     }
 

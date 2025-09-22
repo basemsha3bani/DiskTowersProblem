@@ -1,39 +1,61 @@
 ﻿
-using DiskTowersProblem;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
-
-Console.WriteLine("Enter number of disks");
-
-int numberOfDisks;
-if(!int.TryParse(Console.ReadLine(),out numberOfDisks))
+using InfraStructure.Persistence;
+using DiskTower.Application.Features.TestTower.Commands;
+using DiskTower.Application.Features.TestTower.Commands.CreateDisk.DTOS;
+using System.Drawing;
+using System.Threading.Tasks;
+class program
 {
-    Console.WriteLine("invalid number");
-    return;
-}
-if(numberOfDisks<=0 ||numberOfDisks>10000000)
-{
-    Console.WriteLine("number out of range");
-    return;
-}
-Console.WriteLine("Enter disk sizes");
-List<int>DiskSizes = Console.ReadLine().Split(" ").Select(s=>
-{
-    int diskSize;
-    if(!int.TryParse(s,out diskSize))
+    static async Task Main(string[] args)
     {
-        return 0;
-        
+
+       await Start();
     }
-    return diskSize;
+    static async Task Start()
+    {
+       var services= CreateService();
+        Application app = services.GetRequiredService<Application>();
+     string result= await  app.CreateDisk();
+    }
+    static IServiceProvider CreateService()
+    {
+        return new ServiceCollection()
+            .AddCustomServices()
+             .AddSingleton(typeof(Application))
+             .AddLogging()
+            .BuildServiceProvider();
+    }
+}
+public class Application
+{
+    CreateDiskCommand _createDiskCommand;
+    public Application(CreateDiskCommand createDiskCommand)
+    {
 
-}).ToList();
-
-DiskTowerBulder towerBulder = new DiskTowerBulder();
-towerBulder.diskSizes = DiskSizes;
-towerBulder.numberOfDisks = numberOfDisks;
-
-List<string> blocks= towerBulder.buildTower();
+        _createDiskCommand = createDiskCommand;
+    }
+   public async Task<string> CreateDisk()
+    {
 
 
-Console.ReadLine();
+        DiskTowerDto towerDto = new DiskTowerDto();
+        towerDto.numberOfDisks = 3;
+        towerDto.disks = new List<DiskDto>()
+        {
+            new DiskDto() { size = 3},
+            new DiskDto() { size = 0},
+            new DiskDto() { size = 1}
+};
+      return  await _createDiskCommand.CreateDisk(towerDto);
+    }
+}
+
+
+
+
+
+
+
 

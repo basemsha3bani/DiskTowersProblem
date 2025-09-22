@@ -9,14 +9,14 @@ using System.Text;
 
 namespace DiskTower.Application.Features.TestTower.Commands.CreateDisk.Validation
 {
-    internal abstract class  AbstractDiskTowerValidator
+    public abstract class  AbstractDiskTowerValidator
 
     {
        
         public abstract bool validate(DiskTowerDto disk);
 
         protected AbstractDiskTowerValidator nextValidator;
-
+        public string validationMessage { get; set; }
 
         
         
@@ -31,7 +31,7 @@ namespace DiskTower.Application.Features.TestTower.Commands.CreateDisk.Validatio
             return nextValidator.validate(disk);
         }
     }
-    internal class disktoweNumberOfDisksValidator : AbstractDiskTowerValidator
+    public class disktoweNumberOfDisksValidator : AbstractDiskTowerValidator
     {
         public disktoweNumberOfDisksValidator(disktoweDisksSizeValidator disksSizeValidator)
         {
@@ -42,17 +42,20 @@ namespace DiskTower.Application.Features.TestTower.Commands.CreateDisk.Validatio
         {
            if(disk.numberOfDisks!=disk.disks.Count)
             {
+                validationMessage= "Number of disks does not match the count of disks provided.";
                 return false;
             }
+           
             return base.PerformSubValidation(disk);
         }
     }
-    internal class disktoweDisksSizeValidator : AbstractDiskTowerValidator
+    public class disktoweDisksSizeValidator : AbstractDiskTowerValidator
     {
         public override bool validate(DiskTowerDto disk)
         {
             if (disk.disks.Any(a=>a.size<=0))
             {
+                validationMessage = "There are invalid disk sizes";
                 return false;
             }
             return true;

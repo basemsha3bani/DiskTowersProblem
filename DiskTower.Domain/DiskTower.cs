@@ -6,11 +6,11 @@ using System.Xml.Linq;
 
 namespace DiskTower.Domain
 {
-  public  class DiskTower
+  public  class DiskTower: GnericEntity
     {
 
-        public List<Disk> disks { get; set; }
+        internal List<Disk> disks { get; set; }
 
-        public int numberOfDisks { get; set; }
+        internal int numberOfDisks { get; set; }
     }
 }
