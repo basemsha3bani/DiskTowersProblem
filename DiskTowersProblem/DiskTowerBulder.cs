@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiskTower.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -8,25 +9,26 @@ using System.Threading.Tasks;
 
 namespace DiskTowersProblem
 {
-    
+
     public class DiskTowerBulder
 
 
     {
-        public DiskTowerBulder() { 
+        public DiskTowerBulder()
+        {
         }
         private bool invalid;
 
-       public int numberOfDisks { get; set; }
+        public int numberOfDisks { get; set; }
 
-       public List<int> diskSizes { get; set; }
-        
-       public string ErrorMessage { get; set; }
+        public List<int> diskSizes { get; set; }
+
+        public string ErrorMessage { get; set; }
 
 
-      public  List<string> buildTower()
+        public List<string> buildTower()
         {
-           if(!this.validate())
+            if (!this.validate())
             {
                 throw new Exception(ErrorMessage);
             }
@@ -51,16 +53,16 @@ namespace DiskTowersProblem
                 }
                 else
                 {
-                    PrintQueue = DiskTower.Where(w=>!w.printed)
+                    PrintQueue = DiskTower.Where(w => !w.printed)
                                                                .OrderByDescending(ob => ob.size)
                                                                .Select(s => s.size).ToList();
                 }
-                    if(PrintQueue.Any())
+                if (PrintQueue.Any())
                     towerBlocks.Add(string.Join(" ", PrintQueue));
 
-                    diskSet.AddRange(PrintQueue);
+                diskSet.AddRange(PrintQueue);
 
-                
+
 
                 DiskTower = DiskTower.Select(s =>
                 {
@@ -73,25 +75,24 @@ namespace DiskTowersProblem
         }
         bool validate()
         {
-            
-                if (diskSizes.Count != numberOfDisks)
-                {
-                    ErrorMessage="number of disks does not equal" + numberOfDisks.ToString();
-                    
-                }
-                if (diskSizes.Any(a => a <= 0))
-                {
-                    ErrorMessage="some disks are of invalid size ";
-                     
-                }
-            return (string.IsNullOrEmpty(ErrorMessage));
+
+            if (diskSizes.Count != numberOfDisks)
+            {
+                ErrorMessage = "number of disks does not equal" + numberOfDisks.ToString();
+
             }
-            
+            if (diskSizes.Any(a => a <= 0))
+            {
+                ErrorMessage = "some disks are of invalid size ";
 
-
-
-
+            }
+            return (string.IsNullOrEmpty(ErrorMessage));
         }
+
+
+
+
 
     }
 
+}

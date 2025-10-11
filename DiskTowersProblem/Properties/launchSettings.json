@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DiskTowersProblem": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
