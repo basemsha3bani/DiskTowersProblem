@@ -24,7 +24,7 @@ namespace DsikTowerProblemTest
 
             // Assert
 
-            diskTower.Should().HaveCount(1);
+            diskTower.Should().HaveCount(2);
 
         }
         [TestMethod]
